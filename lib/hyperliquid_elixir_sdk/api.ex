@@ -22,6 +22,9 @@ defmodule HyperliquidElixirSdk.Api do
   end
 
   def process_response_body(body) do
-    Jason.decode!(body)
+    case Jason.decode(body) do
+      {:ok, map} -> map
+      _ -> body
+    end
   end
 end
